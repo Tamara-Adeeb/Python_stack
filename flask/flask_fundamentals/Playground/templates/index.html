@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <!-- <styly>
+        div{
+            margin: 0 auto;
+            background: orange;
+            border-radius: 10px;
+            width: 100px;
+            height: 100px;
+        }
+    </styly> -->
+</head>
+<body>
+    <h1 style="text-align: center;color:rgb(56, 30, 19);"> Welcome to playground!</h1>
+    <p style="text-align: center;color:rgb(56, 30, 19);">You can enter what ever number and color and see what will happend</p>
+    <div style="display: flex;flex-wrap: wrap; justify-content: center; align-items: center; width: 100%; height: 100%;background-color:tomato;">
+    {% for i in range(1,num+1)%}
+    <div style="position:relative; color:rgb(56, 30, 19);font-weight: bold;border: 1px dashed gray; border-radius: 5px;width: 150px;height: 150px;margin:5px;background-color:{{color}};">
+    <span style="position: absolute;top: 45%;left: 15%;">Block number {{i}}</span></div>
+    {% endfor %}
+</div>
+</body>
+</html>
