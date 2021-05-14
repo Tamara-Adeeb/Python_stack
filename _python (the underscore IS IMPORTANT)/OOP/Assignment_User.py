@@ -12,6 +12,7 @@ class Users:
     def transfer_money(self, other_user, amount):
         self.account_balance -= amount
         other_user.make_deposit(amount)
+        
     
 Tamara = Users("Tamara Adeeb","email")
 Adeeb = Users("Adeeb Adeeb","email")
