@@ -11,7 +11,10 @@ def login():
 def user():
     user_name = request.form["name"]
     user_email = request.form["email"]
-    return render_template("show.html", user_name=user_name,user_email=user_email)
+    if user_name == "" or user_email == "":
+        return redirect(url_for("login"))#how i can redirect to function and pass new parameters in my case a new massage
+    else:
+        return render_template("show.html", user_name=user_name,user_email=user_email)
 
 
 if __name__=="__main__":
