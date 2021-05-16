@@ -6,7 +6,7 @@ app = Flask(__name__)
 def dojo_login():
     location = ["Palestine", "China", "Japan"]
     gender = ["Female", "Male"]
-    language = ["Python","Marine","Java","JavaScript"]
+    language = ["Python","Marne","Java","JavaScript"]
     return render_template("index.html", location=location, gender=gender, language=language)
 
 @app.route("/userinfo", methods=["POST"])
