@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+</head>
+<body>
+    <h1>You visited our site {{time}} times</h1>
+    <h1>Your number is {{counter}} </h1>
+    <form action="/destroy_session" method="POST">
+        {% csrf_token %}
+        <button type="submit" value="Reset">Reset</button>
+    </form>
+    <form action="/add2" method="POST">
+        {% csrf_token %}
+        <button type="submit" >Add +2</button>
+    </form>
+    <form action="/add_random" method="POST">
+        {% csrf_token %}
+        <input type="text" name="random"/>
+        <button type="submit" >Add</button>
+    </form>
+</body>
+</html>
