@@ -1,0 +1,15 @@
+from users_app.models import *
+first_row = Users(first_name="Dara",last_name="Rateb",email_address="dara@gmail.com",age=28)
+>>> first_row.save()
+>>> sec_row = Users.objects.create(first_name="Tamara",last_name="Adeeb",email_address="tamara@gmail.com",age=26)
+>>>sec_row = Users.objects.create(first_name="Ali",last_name="Adeeb",email_address="ali@gmail.com",age=21)
+all_users = Users.objects.all()
+>>> last_users = Users.objects.last()
+>>> first_users = Users.objects.first()
+update_3 = Users.objects.get(id=3)
+>>> update_3.last_name = "Pancakes"
+del_2 = Users.objects.get(id=2)
+>>> del_2.delete()
+print(Users.objects.all().orderdby("first_name")
+Users.objects.all().order_by("-first_name")
+
