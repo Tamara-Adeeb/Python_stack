@@ -1,21 +1,26 @@
 from django.shortcuts import redirect, render
-import random 	                # import the random module
+import random
 
 def random(request):
     if "random" not in request.session:
-        request.session["random"] = 0
-    request.session["random"] = request.POST["user_number"]
-    return(request, "index.html")
-
-def check(request):
+        request.session["random"] = random.randint(1, 100)
     context = {
         "random": request.session["random"],
-        "number": request.POST["user_number"]
+        "number": request.session["number"],
+        "result": request.session["result"]
     }
-    if request.POST["user_number"] > request.session["random"]:
-        request.session["result"] = 0
-    if request.POST["user_number"] == request.session["random"]:
-        request.session["result"] = 1
-    if request.POST["user_number"] == request.session["random"]:
-        request.session["result"] = 2
     return render(request,"index.html",context)
+    
+def check(request):
+    if "result" not in request.session:
+        request.session["result"] = 0
+    request.session["number"] = int(request.POST["user_number"])
+    if request.session["number"] > request.session["random"]:
+        request.session["result"] = 0
+    if request.session["number"] == request.session["random"]:
+        request.session["result"] = 1
+    if request.session["number"] < request.session["random"]:
+        request.session["result"] = 2
+    
+    return redirect("/")
+

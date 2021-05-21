@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Your Gold: {{total_gold}}</p>
+    <div>
+        <h3> Farm </h3>
+        <p> earns 10-20 golds </p>
+        <form action="/process_money" method="POST">
+            <input type="hidden" name="place" value="farm">
+            <input type="submit" value="Find Gold!">
+        </form>
+    </div>
+    <div>
+        <h3> Cave </h3>
+        <p> earns 10-20 golds </p>
+        <form action="/process_money" method="POST">
+            <input type="hidden" name="place" value="cave">
+            <input type="submit" value="Find Gold!">
+        </form>
+    </div>
+    <div>
+        <h3> House </h3>
+        <p> earns 10-20 golds </p>
+        <form action="/process_money" method="POST">
+            <input type="hidden" name="place" value="house">
+            <input type="submit" value="Find Gold!">
+        </form>
+    </div>
+    <div>
+        <h3>Casino</h3>
+        <p> earns 10-20 golds </p>
+        <form action="/process_money" method="POST">
+            <input type="hidden" name="place" value="casino">
+            <input type="submit" value="Find Gold!">
+        </form>
+    </div>
+    <p> Activities</p>
+    <p style="overflow: scroll;"></p>
+</body>
+</html>

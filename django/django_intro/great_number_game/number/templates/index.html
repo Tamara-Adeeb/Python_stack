@@ -10,11 +10,11 @@
     <h1>Welcome to the Great Number Game! </h1>
     <p> i am thinking of a number between 1 and 100 </p> 
     <p> Take a guess! </p> 
-    {% if number < random %}
+    {% result == 2 %}
         <div style="width:200px;height:200px;background:red;"> Too Low!</div>
     {% endif %}
     <p> Take a guess! </p> 
-    {% elif number == random %}
+    {% result == 1 %}
         <div style="width:200px;height:200px;background:green;">
             <p>{{random}} was the number!</p>
             <form action="/try" method="POST">
@@ -22,7 +22,7 @@
             </form>
             </div>
     {% endif %}
-    {% elif number > random %}
+    {% result == 0 %}
     <div style="width:200px;height:200px;background:red;"> Too Height!</div>
     {% endif %}
 
