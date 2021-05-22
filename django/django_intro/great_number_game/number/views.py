@@ -4,7 +4,7 @@ import random
 def random(request):
     if "random" not in request.session:
         request.session["random"] = random.randint(1, 100)
-  
+
     return render(request,"index.html")
     
 def check(request):
@@ -18,7 +18,7 @@ def check(request):
         request.session["result"] = 2
     return redirect("/")
 
-def try(request):
-    request.session.clear
+def try_again(request):
+    request.session.clear()
     return redirect("/")
 

@@ -5,22 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Counter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        *{
+            padding: 10px;
+        }
+        p {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        input{
+            width: 450px;
+        }
+    </style>
 </head>
 <body>
     <h1>You visited our site {{time}} times</h1>
     <h1>Your number is {{counter}} </h1>
-    <form action="/destroy_session" method="POST">
-        {% csrf_token %}
-        <button type="submit" value="Reset">Reset</button>
-    </form>
+    <hr>
     <form action="/add2" method="POST">
         {% csrf_token %}
-        <button type="submit" >Add +2</button>
+        <button type="submit" class="btn btn-success" >Add +2</button>
     </form>
     <form action="/add_random" method="POST">
         {% csrf_token %}
+        <p> Add any Random number to our counter</p>
         <input type="text" name="random"/>
-        <button type="submit" >Add</button>
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <br>
+    <form action="/destroy_session" method="POST">
+        {% csrf_token %}
+        <button type="submit" value="Reset" class="btn btn-danger">Reset</button>
     </form>
 </body>
 </html>
