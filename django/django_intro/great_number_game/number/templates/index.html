@@ -10,23 +10,24 @@
     <h1>Welcome to the Great Number Game! </h1>
     <p> i am thinking of a number between 1 and 100 </p> 
     <p> Take a guess! </p> 
-    {% result == 2 %}
+    {% if request.session.result == 2 %}
         <div style="width:200px;height:200px;background:red;"> Too Low!</div>
     {% endif %}
     <p> Take a guess! </p> 
-    {% result == 1 %}
+    {% if request.session.result == 1 %}
         <div style="width:200px;height:200px;background:green;">
-            <p>{{random}} was the number!</p>
+            <p>{{request.session.random}} was the number!</p>
             <form action="/try" method="POST">
                 <input type="submit" value="Try Agin"/>
             </form>
             </div>
     {% endif %}
-    {% result == 0 %}
+    {% if request.session.result == 0 %}
     <div style="width:200px;height:200px;background:red;"> Too Height!</div>
     {% endif %}
 
     <form action="/check" method="POST">
+    {% csrf_token %}
         <input type="text" name="user_number" />
         <input type="submit" value="submit"/>
     </form>

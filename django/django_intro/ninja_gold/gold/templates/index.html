@@ -7,11 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Your Gold: {{total_gold}}</p>
+    <p>Your Gold: {{request.session.gold}}</p>
     <div>
         <h3> Farm </h3>
         <p> earns 10-20 golds </p>
         <form action="/process_money" method="POST">
+            {% csrf_token %}
             <input type="hidden" name="place" value="farm">
             <input type="submit" value="Find Gold!">
         </form>
@@ -20,6 +21,7 @@
         <h3> Cave </h3>
         <p> earns 10-20 golds </p>
         <form action="/process_money" method="POST">
+            {% csrf_token %}
             <input type="hidden" name="place" value="cave">
             <input type="submit" value="Find Gold!">
         </form>
@@ -28,6 +30,7 @@
         <h3> House </h3>
         <p> earns 10-20 golds </p>
         <form action="/process_money" method="POST">
+            {% csrf_token %}
             <input type="hidden" name="place" value="house">
             <input type="submit" value="Find Gold!">
         </form>
@@ -36,11 +39,16 @@
         <h3>Casino</h3>
         <p> earns 10-20 golds </p>
         <form action="/process_money" method="POST">
+            {% csrf_token %}
             <input type="hidden" name="place" value="casino">
             <input type="submit" value="Find Gold!">
         </form>
     </div>
     <p> Activities</p>
-    <p style="overflow: scroll;"></p>
+    <p style="overflow: scroll;">
+    {% for i in request.session.active %}
+    {{i}}
+    {% endfor %}
+    </p>
 </body>
 </html>

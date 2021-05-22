@@ -2,25 +2,29 @@ from django.shortcuts import render,redirect
 import random
 
 def gold(request):
-    if "gold" not in request.session:
-        request.session["gold"] = 0
-    context = {
-        "total_gold": request.session["gold"]
-    }
-    return render(request,"index.html",context)
+    # if "gold" not in request.session:
+    #     request.session["gold"] = 0
+    return render(request,"index.html")
 
 def total_gold(request):
-    if "place" not in request.session:
-        request.session["place"] == ""
-    request.session["place"] = request.POST["place"]
     if "gold" not in request.session:
         request.session["gold"] = 0
-    if request.session["place"] == "farm":
-        request.session["gold"] += random.randint(10, 20)
-    if request.session["place"] == "cave":
-        request.session["gold"] += random.randint(5, 10)
-    if request.session["place"] == "house":
-        request.session["gold"] += random.randint(2, 5)
-    if request.session["place"] == "casino":
-        request.session["gold"] += random.randint(-50, 50)
+    if "active" not in request.session:
+        request.session["active"] = []
+    place = request.POST["place"]
+    if request.POST["place"] == "farm":
+        x = random.randint(10, 20)
+        request.session["gold"] += x
+    if request.POST["place"] == "cave":
+        x = random.randint(5, 10)
+        request.session["gold"] += x
+    if request.POST["place"] == "house":
+        x = random.randint(2, 5)
+        request.session["gold"] += x
+    if request.POST["place"] == "casino":
+        x = random.randint(-50, 50)
+        request.session["gold"] += x
+    if x > 0:
+        request.session["active"].append(f"<p style='color:green;'> Earned {x} gold from the {place}!</p>")
+
     return redirect("/")
