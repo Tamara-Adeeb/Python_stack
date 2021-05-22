@@ -24,7 +24,9 @@ def total_gold(request):
     if request.POST["place"] == "casino":
         x = random.randint(-50, 50)
         request.session["gold"] += x
-    if x > 0:
-        request.session["active"].append(f"<p style='color:green;'> Earned {x} gold from the {place}!</p>")
+    if x >= 0:
+        request.session["active"].append(f"Earned {x} golds from the {place}!")
+    if x < 0 :
+        request.session["active"].append(f"Entered a casino and lost {x} golds...Ouch")
 
     return redirect("/")
