@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <h2> Add a Dojo</h2>
+        <form action="/add" method="POST">
+            {% csrf_token %}
+            Name <input type="text" name="name">
+            City <input type="text" name="city">
+            State <input type="text" name="state">
+            <input type="hidden" name="add_data" value="Dojo">
+            <input type="submit" value="Add">
+        </form>
+    </section>
+    <section>
+        <h2> Add a Ninja</h2>
+        <form action="/add" method="POST">
+            {% csrf_token %}
+            First Name <input type="text" name="first_name">
+            Last Name <input type="text" name="last_name">
+            Dojo<select class="form-control" name="dojo">
+                    <option>-select a dojo-</option>
+                    {% for i in Dojo %}
+                    <option  value="{{i.id}}">{{i.name}}</option>
+                    {% endfor %}
+                </select>
+            <input type="hidden" name="add_data" value="Ninja">
+            <input type="submit" value="Add">
+        </form>
+    </section>
+    <ul>
+        {% for i in Dojo %}
+        <h3> {{i.name}}</h3>
+            {% for x in i.ninja.all %}
+            <li> {{x.first_name}} {{x.last_name}}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

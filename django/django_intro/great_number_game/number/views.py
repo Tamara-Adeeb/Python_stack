@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 import random
 
-def random(request):
+def random1(request):
     if "random" not in request.session:
         request.session["random"] = random.randint(1, 100)
 
@@ -17,7 +17,7 @@ def check(request):
     if int(request.POST["user_number"]) < request.session["random"]:
         request.session["result"] = 2
     return redirect("/")
-
+    
 def try_again(request):
     request.session.clear()
     return redirect("/")
