@@ -7,35 +7,70 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
+    <style>
+        body {
+            padding-left: 30px;
+            padding-top: 30px;
+        }
+        section{
+            display: inline-block;
+        }
+        ul{
+            margin-top: 30px;
+        }
+        #one {
+            border-right: 1px solid #ced4da;
+            padding-right: 200px;
+        }
+        #two {
+            margin-left: 200px;
+        }
+    </style>
 </head>
 <body>
-    <section>
+    <section id="one">
         <h2> Add a Dojo</h2>
         <form action="/add" method="POST">
             {% csrf_token %}
-            Name <input type="text" name="name">
-            City <input type="text" name="city">
-            State <input type="text" name="state">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="text" name="name" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="Dojo Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">City</label>
+                <input type="text" name="city" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="City Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">State </label>
+                <input type="text" name="state" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="State">
+            </div>
             <input type="hidden" name="add_data" value="Dojo">
-            <input type="submit" value="Add">
+            <input class="btn btn-primary" value="Add">
         </form>
     </section>
-    <section>
+    <section id="two">
         <h2> Add a Ninja</h2>
         <form action="/add" method="POST">
             {% csrf_token %}
-            First Name <input type="text" name="first_name">
-            Last Name <input type="text" name="last_name">
-            Dojo<select class="form-control" name="dojo">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">First Name</label>
+                <input type="text" name="first_name" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Last Name</label>
+                <input type="text" name="last_name" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="Last Name">
+            </div>
+            Dojo<select style="width: 300px;" class="custom-select" name="dojo">
                     <option>-select a dojo-</option>
                     {% for i in Dojo %}
                     <option  value="{{i.id}}">{{i.name}}</option>
                     {% endfor %}
                 </select>
             <input type="hidden" name="add_data" value="Ninja">
-            <input type="submit" value="Add">
+            <input class="btn btn-primary" type="submit" value="Add">
         </form>
     </section>
+    <hr>
     <ul>
         {% for i in Dojo %}
         <h3> {{i.name}}</h3>

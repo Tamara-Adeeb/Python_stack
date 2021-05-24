@@ -13,11 +13,6 @@ def home(request):
 def add(request):
     if request.POST["add_data"] == "Dojo":
         Dojos.objects.create(name=request.POST["name"], city=request.POST["city"],state=request.POST["state"])
-        # list = []
-        # x = Dojos.objects.create(name=request.POST["name"], city=request.POST["city"],state=request.POST["state"])
-        # list.append(x)
-        # print(x)
-        # request.session["dojo"] = list  
         return redirect("/")
     if request.POST["add_data"] == "Ninja":
         Ninjas.objects.create(first_name=request.POST["first_name"],last_name=request.POST["last_name"], dojo_id=Dojos.objects.get(id = int(request.POST["dojo"])))

@@ -16,8 +16,8 @@
 <body>
     
     <h1> {{My_book.title}}</h1>
-    <p>ID: {{My_book.id}}</p>
-    <p> Description: {{My_book.desc}}</p>
+    <p><mark>ID: </mark> {{My_book.id}}</p>
+    <p><mark>Description: </mark>  {{My_book.desc}}</p>
     <ol> Authors:
         {% for x in auth %}
         <li>{{x.first_name}} {{x.last_name}}</li>

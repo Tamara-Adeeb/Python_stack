@@ -15,8 +15,8 @@
 </head>
 <body>
     <h1> {{My_author.first_name}} {{My_author.last_name}}</h1>
-    <p>ID: {{My_author.id}}</p>
-    <p> Notes: {{My_author.notes}}</p>
+    <p><mark> ID: </mark>{{My_author.id}}</p>
+    <p><mark> Notes: </mark> {{My_author.notes}}</p>
     <ol> 
         {% for x in books %}
         <li>{{x.title}}</li>
