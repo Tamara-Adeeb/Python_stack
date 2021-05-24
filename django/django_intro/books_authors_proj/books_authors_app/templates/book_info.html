@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> {{My_book.title}}</h1>
+    <p>ID: {{My_book.id}}</p>
+    <p> Description: {{My_book.desc}}</p>
+    <ol> Authors:
+        {% for x in auth %}
+        <li>{{x.first_name}} {{x.last_name}}</li>
+        {% endfor %}
+        </ol>
+        <form action="/many_to_many2" method="POST">
+            {% csrf_token %}
+            <select name="select_auth">
+                {% for j in All_auth %}
+                <option value="{{j.id}}"> {{j.first_name}} </option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="submit">
+</body>
+</html>
