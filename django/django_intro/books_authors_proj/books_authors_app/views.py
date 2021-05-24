@@ -15,9 +15,11 @@ def book_data(request):
 
 def book_show(request,id):
     b = Books.objects.get(id=id)
+    request.session["Book_id"] = id
     context = {
         "My_book": b,
-        "auth": b.author.all()
+        "auth": b.author.all(),
+        "All_Authors":Authors.objects.all()
     }
     return render(request,"book_info.html",context)
 
@@ -46,6 +48,12 @@ def select_book(request):
     Bo = request.POST["select_book"]
     create_book(this_author,Bo)
     return redirect("authors/"+str(request.session["id"]))
+def select_auth(request):
+    this_book = Books.objects.get(id=request.session["Book_id"])
+    selected_book = request.POST["select_auther"]
+    create_author(this_book ,selected_book)
+    return redirect("books/"+str(request.session["Book_id"]))
+
 
 
 

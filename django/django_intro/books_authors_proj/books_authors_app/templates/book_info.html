@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
+    <style>
+        *{
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
+    
     <h1> {{My_book.title}}</h1>
     <p>ID: {{My_book.id}}</p>
     <p> Description: {{My_book.desc}}</p>
@@ -17,11 +25,12 @@
         </ol>
         <form action="/many_to_many2" method="POST">
             {% csrf_token %}
-            <select name="select_auth">
-                {% for j in All_auth %}
-                <option value="{{j.id}}"> {{j.first_name}} </option>
+            <select style="width: 300px;" class="custom-select" name="select_auther">
+                {% for j in All_Authors %}
+                <option value="{{j.id}}"> {{j.first_name}} {{j.last_name}}</option>
                 {% endfor %}
             </select>
-            <input type="submit" value="submit">
+            <input class="btn btn-primary" type="submit" value="submit">
+        
 </body>
 </html>

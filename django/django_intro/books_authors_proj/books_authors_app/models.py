@@ -25,6 +25,6 @@ def create_book(this_authour,Bo):
     added_book = Books.objects.get(id=Bo)
     this_authour.Books.add(added_book)
 
-def create_auth(this_Book,Ba):
-    added_auth = Authors.objects.get(id=Ba)
+def create_author(this_Book,id):
+    added_auth = Authors.objects.get(id=id)
     this_Book.author.add(added_auth)

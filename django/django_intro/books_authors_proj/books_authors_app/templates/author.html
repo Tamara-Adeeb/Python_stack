@@ -4,30 +4,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Document</title>
+    <style>
+        table{
+            margin: 30px;
+
+        }
+        form{
+            margin: 30px;
+
+        }
+        legend { 
+            display: block;
+            padding-left: 2px;
+            padding-right: 2px;
+            border: none;
+        }
+
+    </style>
 </head>
 <body>
-    <h2> Add an Author</h2>
+    <fieldset>
+        <legend>Add an Author</legend>
     <form action="/authors/data" method="POST">
         {% csrf_token %}
-        First Name: <input type="text" name="fname" />
-        Last Name: <input type="text" name="lname" />
-        Notes: <textarea name="note"  cols="30" rows="10"></textarea>
-        <input type="submit" value="submit">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">First Name</label>
+            <input type="text" name="fname" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Last Name</label>
+            <input type="text" name="lname" class="form-control" id="exampleFormControlInput1" style="width: 300px;"placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Notes</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="note"style="width: 300px;" rows="4"></textarea>
+        </div>
+    
+        <input class="btn btn-primary" type="submit" value="submit">
     </form>
-    <table>
-        
+    <table class="table" style="width: 600px;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Author Name</th>
+                <th scope="col">View Author</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for i in Author %}
         <tr>
             <td> {{i.id}}</td>
-            <td> {{i.first_name}} {{i.last_name}}</td>
+            <td> {{i.first_name}}  {{i.last_name}}</td>
             <td> <a href="/authors/{{i.id}}"> view </a></td>
         </tr>
         {% endfor %}
-        
-        
-
-
+        </tbody>
     </table>
 </body>
 </html>
