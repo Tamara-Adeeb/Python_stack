@@ -1,0 +1,45 @@
+from books_authors_app.models import *
+c_sharp = Books.objects.create(title="C Sharp",desc="programing Language")
+>>> java = Books.objects.create(title="Java",desc="programing Language")
+>>> python = Books.objects.create(title="Python",desc="programing Language")
+>>> php = Books.objects.create(title="PHP",desc="programing Language")
+>>> ruby = Books.objects.create(title="Ruby",desc="programing Language")
+author_1 = Authors.objects.create(first_name="Jane",last_name="Austen")
+>>> author_2 = Authors.objects.create(first_name="Emily",last_name="Dickinson")
+>>> author_3 = Authors.objects.create(first_name="Fyodor",last_name="Dostoevsky")
+>>> author_4 = Authors.objects.create(first_name="William",last_name="Shakespeare")
+>>> author_5 = Authors.objects.create(first_name="Lau",last_name="Tzu")
+ from books_authors_app.models import *
+>>> c = Books.objects.get(id=1)
+>>> c.title = "c#"
+A_first = Authors.objects.first()
+A_first.first_name = "Bill"
+ first_book = Books.objects.first()
+>>> A_first.Books.add(first_book)
+A_first.Books.add(Books.objects.get(id=2))
+Sec_Auth = Authors.objects.get(id=2)
+Sec_Auth.Books.add(Books.objects.get(id=1))
+>>> Sec_Auth.Books.add(Books.objects.get(id=2))
+>>> Sec_Auth.Books.add(Books.objects.get(id=3))
+ third_auth = Authors.objects.get(id=3)
+>>> third_auth.Books.add(Books.objects.get(id=1))
+>>> third_auth.Books.add(Books.objects.get(id=2))
+>>> third_auth.Books.add(Books.objects.get(id=3))
+>>> third_auth.Books.add(Books.objects.get(id=4))
+>>> forth_auth = Authors.objects.get(id=4)
+forth_auth.Books.add(Books.objects.get(id=1))
+>>> forth_auth.Books.add(Books.objects.get(id=2))
+>>> forth_auth.Books.add(Books.objects.get(id=3))
+>>> forth_auth.Books.add(Books.objects.get(id=4))
+>>> forth_auth.Books.add(Books.objects.get(id=5))
+>>>Book_3 = Books.objects.get(id=3)
+>>> Book_3.author.all()
+auth_5 = Authors.objects.get(id=5)
+>>> book_2 = Books.objects.get(id=2)
+>>> book_2.author.add(auth_5)
+ third_auth.Books.all()
+<QuerySet [<Books: Books object (1)>, <Books: Books object (2)>, <Books: Books object (3)>, <Books: Books object (4)>]>
+book_5.author.all()
+<QuerySet [<Authors: Authors object (4)>]>
+
+
