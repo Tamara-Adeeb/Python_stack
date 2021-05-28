@@ -6,6 +6,7 @@ class Books(models.Model):
     desc = models.TextField()
     created_at = models.TimeField(auto_now_add=True)
     updated_at = models.TimeField(auto_now=True)
+    # related_name => author = []
 
 class Authors(models.Model):
     first_name = models.CharField(max_length=45)
