@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.fields import CharField
 from django.db import models
 import re
+import bcrypt
 
 class UserManager(models.Manager):
     def Registration_validator(self,postData):
@@ -35,17 +36,24 @@ def creat_user(data,pw_hash):
 
 def email_check(data):
     users=User.objects.filter(email=data["email"])
-    user_email=users[0]
-    if user_email == None:
+    if len(users) == 0:
         return False
-    else:
-        True
+    if len(users) > 0:
+        return True
+    # user_email=users[0]
+    # if user_email == None:
+    #     return False
+    # else:
+    #     True
 
 def check_user(data):
     users=User.objects.filter(email=data["email"])
-    user=users[0]
-    if bcrypt.checkpw(data['password'].encode(), user.password.encode()):
-        return True
-    if user == None:
-        return False
-    return False
+    if len(users) == 0:
+        x = 'user is not found'
+        return 'user is not found'
+    else:
+        if bcrypt.checkpw(data['password'].encode(), users.password.encode()):
+            return False
+        else:
+            x = 'password is wrong'
+            return 'password is wrong'

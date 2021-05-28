@@ -7,6 +7,10 @@
     <title>Home Page</title>
 </head>
 <body>
-    <h1> Welcome {{user}} </h1>
+    <h1> Welcome {{request.session.name}} </h1>
+    <form action="/" method="POST">
+        {% csrf_token %}
+    <input type="submit" value="Log Out">
+    </form>
 </body>
 </html>
