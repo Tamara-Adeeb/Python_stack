@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">  
+    <style>
+        header{
+            display: flex;
+            justify-content: space-between;
+        }
+        #massage_content {
+            margin: 10px;
+        }
+        #comment_content{
+            margin: 10px;
+            width: 500px;
+        }
+        #comment{
+            margin-left: 10px;
+            margin-bottom: 5px;
+        }
+        #massage{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar navbar-light bg-light">
+        <h2> CodingDojo Wall </h2>
+        <h3> Welcome {{request.session.name}} </h3>
+        <form action="/logout" method="POST">
+            {% csrf_token %}
+        <input type="submit" value="Log Out" class="btn btn-secondary">
+        </form>
+    </header>
+    <main>
+        <form action="/create_massage" method="POST">
+            {% csrf_token %}
+            <textarea name="massage_content" style="width: 700px;" class="form-control" id="massage_content" rows="7"></textarea>
+            <input type="submit" value="Post a massage" id = "massage" class="btn btn-warning active">
+        </form>
+        {% for i in all_massages %}
+        <h5> {{i.user_id.first_name}} {{i.user_id.last_name}}- {{i.created_at}}</h5>
+            <p> {{i.massage_content}} </p>
+            <form action="/create_comment" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="massage_id" value="{{i.id}}">
+                <textarea name="comment_content"  class="form-control" id="comment_content" rows="3"></textarea>
+                <input type="submit" value="Post a comment" id = "comment" class="btn btn-outline-warning btn-sm">
+            </form>
+            {% for x in comments %}
+                {% if i.id == x.massage_id.id %}
+                    <h6 > {{x.user_id.first_name}} {{x.user_id.last_name}}-{{x.created_at}}</h6>
+                    <p>{{x.comment_content}}</p>
+                    <form action="/delete_comment" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete_comment" value="{{x.id}}">
+                        <input type="submit" value="Delete comment" style="margin: 5px;"class="btn btn-outline-dark btn-sm">
+                    </form>
+                {% endif %}
+            {% endfor %}
+            <form action="/delete_massage" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="delete_massage" value="{{i.id}}">
+                <input type="submit" value="Delete massage"  style="margin: 10px;" class="btn btn-dark">
+            </form>
+        {% endfor %}
+    </main>
+    
+</body>
+</html>

@@ -29,21 +29,25 @@ def login(request):
                     request.session["email"] = reg_user.email
                 return redirect('/welcome')
         elif request.POST["login_type"] == "login":
-            # if check_user(request.POST):
-            #     # users = User.objects.filter(email=request.POST["email"])
-            #     # user = users[0]
-            #     return True
-            user = User.objects.get(email = request.POST["email"])
-            if "user" not in request.session:
-                request.session["user"] = user.id
-                request.session["name"] = user.first_name
-                request.session["email"] = user.email
-                return redirect('/welcome')
-    elif request.method == "GET":
-        return redirect("/")
+            errors = User.objects.login_validator(request.POST)
+            if len(errors) > 0:
+                for key, value in errors.items():
+                    messages.error(request, value)
+                return redirect('/')
+            else:
+                user = User.objects.get(email = request.POST["email"])
+                if "user" not in request.session:
+                    request.session["user"] = user.id
+                    request.session["name"] = user.first_name
+                    request.session["email"] = user.email
+                    return redirect('/welcome')
+    # elif request.method == "GET":
+    #     return redirect("/")
     return redirect("/")
 
 def welcome(request):
+    if "user" not in request.session:
+        return redirect("/")
     return render (request,"welcome.html")
 
 def logout(request):
