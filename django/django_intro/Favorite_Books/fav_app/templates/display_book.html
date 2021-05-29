@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> Welcome {{request.session.name}} </h1>
+    <form action="/logout" method="POST">
+        {% csrf_token %}
+    <input type="submit" value="Log Out">
+    </form>
+    <hr>
+    <h1> {{ book.title }}</h1>
+    <p> Added by: {{ book.uploaded_by.first_name }}</p>
+    <p> Added on: {{ book.created_at }}</p>
+    <p> Last updated on: {{ book.updates_at }}</p>
+    {% if book.uploaded_by.id == current_user.id %}
+    <form action="/update/{{book.id}}" method="POST">
+        {% csrf_token %}
+        Description: <input type="text" name="updated_desc" placeholder="{{ book.desc }}">
+        <input type="submit" value="Update">
+    </form>
+    <form action="/delete/{{book.id}}" method="POST">
+        {% csrf_token %}
+    <input type="submit" value="Delete">
+    </form>
+    {% else %}
+    <p> Description: {{ book.desc }} </p>
+    {% endif %}
+    <h2>Users Who Like This Book: </h2>
+    <ol>
+        {% for i in fav_book %}
+        <li> {{ i.first_name }}</li>
+        {% if i.id == current_user.id %}
+        <a href="/un_favorit/{{book.id}}/{{current_user.id}}"> Un-Favorite </a>
+        {% endif %}
+        {% endfor %}
+    </ol>
+</body>
+</html>

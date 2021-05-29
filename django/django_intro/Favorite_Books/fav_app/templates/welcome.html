@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1> Welcome {{request.session.name}} </h1>
+    <form action="/logout" method="POST">
+        {% csrf_token %}
+    <input type="submit" value="Log Out">
+    </form>
+    <hr>
+    <h3>Add a Favorite Book</h3>
+    <form action="/add_fav_book" method="POST">
+        {% csrf_token %}
+        Title: <input type="text" name="title">
+        Description <input type="text" name="desc">
+    <input type="submit" value="Add">
+    </form>
+    <h3> All Books </h3>
+    {% for i in all_books %}
+        <a href="/books/{{i.id}}"> {{i.title}}</a>
+        <p>(added by {{i.uploaded_by.first_name}})</p>
+        {% for x in i.users_who_like.all %}
+            {% if x.id == current_user.id%}
+            {{x.id}} {{current_user.id}}
+            <p>this is one of your favorite books</p>
+            {% endif %}
+        {% endfor %}
+        
+        {% for j in fav_book %}
+            {% if not j.id == i.id%}
+            {{i.id}} {{j.id}}
+                <a href="/fav_book/{{i.id}}/{{current_user.id}}"> Add to favorite </a>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</body>
+</html>
