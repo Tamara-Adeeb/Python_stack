@@ -4,13 +4,15 @@ from django.db import models
 import re
 import bcrypt
 import datetime
+from datetime import datetime
 # from dateutil.relativedelta import relativedelta
 
 class UserManager(models.Manager):
     def Registration_validator(self,postData):
         errors = {}
-        today = datetime.datetime.now().strftime("%Y%m%d")
-        # years_ago = (datetime.datetime.now() - relativedelta(years=13)).strftime("%Y%m%d")
+        today = datetime.now().strftime("%Y%m%d")
+        # user_birthday =  datetime.strptime(postData["birthday"], '%Y-%m-%d')
+        # years13 = abs((today-user_birthday).days)
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
         if len(postData["fname"]) < 2:
             errors["fname"] = "User first name should be at least 2 characters"
@@ -20,6 +22,8 @@ class UserManager(models.Manager):
             errors['unvalid-email'] = "Invalid email address!"
         if postData["birthday"].replace("-","") > today:
             errors['unvalid-birthday'] = "Invalid birthday"
+        # if years13 < 4745:
+        #     errors["birthday"] = "You should be older than 13 years to register in this website"
         if  len(postData["password"]) < 8:
             errors["lenpassword"] = "User password should be at least 8 characters"
         if  postData["password"] != postData["cpw"] :
@@ -29,7 +33,7 @@ class UserManager(models.Manager):
         errors = {}
         user_email = User.objects.filter(email=postData["email"])
         if len(user_email) == 0:
-            errors['unvalid-email'] = "IThis email is not exist"
+            errors['unvalid-email'] = "This email is not exist"
         else:
             if not bcrypt.checkpw(postData['password'].encode(), user_email[0].password.encode()):
                 errors['password'] = "Wrong password"
@@ -57,14 +61,14 @@ def email_check(data):
         return True
     
 
-def check_user(data):
-    users=User.objects.filter(email=data["email"])
-    if len(users) == 0:
-        x = 'user is not found'
-        return 'user is not found'
-    else:
-        if bcrypt.checkpw(data['password'].encode(), users.password.encode()):
-            return True
-        else:
-            x = 'password is wrong'
-            return 'password is wrong'
+# def check_user(data):
+#     users=User.objects.filter(email=data["email"])
+#     if len(users) == 0:
+#         x = 'user is not found'
+#         return 'user is not found'
+#     else:
+#         if bcrypt.checkpw(data['password'].encode(), users.password.encode()):
+#             return True
+#         else:
+#             x = 'password is wrong'
+#             return 'password is wrong'

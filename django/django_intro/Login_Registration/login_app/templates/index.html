@@ -5,34 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration and Login Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style>
+    content {
+        display: flex;
+    }
+    form {
+        margin: 10px;
+    }
+</style>
+
 </head>
 <body>
-    <h2> Registration </h2>
-    {% if messages %}
-<ul class="list-group" class="messages">    
+    <content>
+    <form action="/process" method="POST" style="border-right: 1px solid #ced4da; padding-right: 300px;margin-left: 60px;">
+        <h2> Registration </h2>
+        {% csrf_token %} 
+        <div class="form-group">
+            <label >First Name</label>
+            <input type="text" name="fname" class="form-control" style="width: 300px;" placeholder="First Name" required/>
+        </div>
+        <div class="form-group">
+            <label >Last Name</label>
+            <input type="text" name="lname" class="form-control" style="width: 300px;" placeholder="Last Name" required/>
+        </div>
+        <div class="form-group">
+            <label >Email</label>
+            <input type="email" name="email" class="form-control" style="width: 300px;" placeholder="Enter your Eamil" required/>
+        </div>
+        <div class="form-group">
+            <label >Birthday</label>
+            <input type="date" name="birthday" class="form-control" style="width: 300px;" placeholder="Enter your Birthday" />
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" name="password" class="form-control" style="width: 300px;" placeholder="Enter your Birthday"/>
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" name="cpw" class="form-control" style="width: 300px;" placeholder="Enter your Birthday"/>
+        </div>
+            <input type="hidden" name="login_type" value="register">
+            <input type="submit" value="Register" class="btn btn-outline-warning">
+        </div>
+    </form>
+    <form action="/process" method="POST" style="padding-left: 300px;">
+        <h2> Login </h2>
+        {% csrf_token %} 
+        <div class="form-group">
+            <label >Email</label>
+            <input type="email" name="email" class="form-control" style="width: 300px;" placeholder="Enter your Eamil" required/>
+        </div>
+        <div class="form-group">
+            <label >Password</label>
+            <input type="password" name="password" class="form-control" style="width: 300px;" placeholder="Enter your Birthday"/>
+        </div>
+        <input type="hidden" name="login_type" value="login">
+        <input type="submit" value="Log In" class="btn btn-outline-warning">
+    </form>
+</content>
+{% if messages %}
+<ul class="list-group list-group-flush" class="messages" style="margin-left: 250px;">   
+    <li class="list-group-item list-group-item-dark" style="width: 800px;">Conseder the below errors</li> 
     {% for message in messages %}    
-        <li class="list-group-item list-group-item-action list-group-item-danger" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        <li class="list-group-item list-group-item-danger" style="width: 800px;" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
     {% endfor %}
 </ul>
 {% endif %}
-    <form action="/process" method="POST">
-        {% csrf_token %} 
-        First Name <input type="text" name="fname" required/>
-        Last Name <input type="text" name="lname" required/>
-        Email <input type="email" name="email" required/>
-        Birthday <input type="date" name="birthday">
-        Password <input type="password" name="password" required />
-        Confirm Password  <input type="password" name="cpw" required/>
-        <input type="hidden" name="login_type" value="register">
-        <input type="submit" value="Register">
-    </form>
-    <h2> Login </h2>
-    <form action="/process" method="POST">
-        {% csrf_token %} 
-        Email <input type="email" name="email" required/>
-        Password <input type="password" name="password" required />
-        <input type="hidden" name="login_type" value="login">
-        <input type="submit" value="Log In">
-    </form>
 </body>
 </html>

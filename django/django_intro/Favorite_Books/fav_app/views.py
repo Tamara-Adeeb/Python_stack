@@ -61,36 +61,39 @@ def logout(request):
     request.session.clear()
     return render(request,"index.html")
 
+
+
 def add_fav_book(request):
     user = User.objects.get(id=request.session["user"])
     user_id = user.id
     create_fav_book(request.POST,user_id)
-    return redirect('/welcome')
+    return redirect('/welcom')
 
 def display_book(request,id):
     current_book = Book.objects.get(id=id)
     context = {
         "book": Book.objects.get(id=id),
         "current_user": User.objects.get(id=request.session["user"]),
-        "fav_book": current_book.users_who_like.all()
+
+        "fav_book": current_book.users_who_like.all(),
     }
     return render(request,"display_book.html",context)
 
 def update_book(request,id):
-    print(request.POST["desc"])
     update_book_desc(request.POST,id)
-    return redirect('books/'+str(id))
+    return redirect('/books/'+str(id))
 
 def delete_book(request,id):
     delete_allBook(id)
-    return redirect('books/'+str(id))
+    return redirect('/welcome')
 
 def un_favorit_book(request,id,uid):
     un_favorit(id,uid)
-    return redirect('books/'+str(id))
+    return redirect('/books/'+str(id))
+
 
 def fav_book(request,id,uid):
     user_fav_book(id,uid)
-    return redirect('books/'+str(id))
+    return redirect('/books/'+str(id))
 
 

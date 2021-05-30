@@ -22,21 +22,13 @@
     </form>
     <h3> All Books </h3>
     {% for i in all_books %}
-        <a href="/books/{{i.id}}"> {{i.title}}</a>
+        <p><a href="/books/{{i.id}}"> {{i.title}}</a></p>
         <p>(added by {{i.uploaded_by.first_name}})</p>
-        {% for x in i.users_who_like.all %}
-            {% if x.id == current_user.id%}
-            {{x.id}} {{current_user.id}}
-            <p>this is one of your favorite books</p>
-            {% endif %}
-        {% endfor %}
-        
-        {% for j in fav_book %}
-            {% if not j.id == i.id%}
-            {{i.id}} {{j.id}}
-                <a href="/fav_book/{{i.id}}/{{current_user.id}}"> Add to favorite </a>
-            {% endif %}
-        {% endfor %}
+        {% if i in current_user.liked_books.all %}
+            <p> This is one of your favorite books </p>
+        {% else %}
+        <a href="/fav_book/{{i.id}}/{{current_user.id}}"> Add to favorite </a>
+        {% endif %}
     {% endfor %}
 </body>
 </html>
